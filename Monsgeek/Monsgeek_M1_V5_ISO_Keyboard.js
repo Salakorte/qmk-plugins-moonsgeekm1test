@@ -1,5 +1,5 @@
 export function Name() { return "Monsgeek M1_V5 ISO"; }
-export function Version() { return "1.1.9"; }
+export function Version() { return "1.1.9-GRBtest"; }
 export function VendorId() { return 0x342d; }
 export function ProductId() { return 0xe4c2; }
 export function Publisher() { return "WhirlwindFX & Salakolte"; }
@@ -24,6 +24,7 @@ export function ControllableParameters() {
 }
 
 //Plugin Version: Built for Protocol V1.0.6
+//MODIFICADO: orden de canal cambiado de RGB a GRB para probar el bug de "azul se ve blanco"
 
 const vKeys = [
     23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10,       //14
@@ -262,8 +263,9 @@ function createSolidColorArray(color) {
 
 	for(let iIdx = 0; iIdx < vKeys.length; iIdx++) {
 		const iLedIdx = vKeys[iIdx] * 3;
-		rgbdata[iLedIdx] = color[0];
-		rgbdata[iLedIdx+1] = color[1];
+		// GRB en vez de RGB
+		rgbdata[iLedIdx] = color[1];
+		rgbdata[iLedIdx+1] = color[0];
 		rgbdata[iLedIdx+2] = color[2];
 	}
 
@@ -285,8 +287,9 @@ function grabColors(overrideColor) {
 		const color = device.color(iPxX, iPxY);
 
 		const iLedIdx = vKeys[iIdx] * 3;
-		rgbdata[iLedIdx] = color[0];
-		rgbdata[iLedIdx+1] = color[1];
+		// GRB en vez de RGB
+		rgbdata[iLedIdx] = color[1];
+		rgbdata[iLedIdx+1] = color[0];
 		rgbdata[iLedIdx+2] = color[2];
 	}
 
